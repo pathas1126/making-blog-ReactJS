@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 class Navigation extends Component {
   render() {
     return (
       <Nav>
         <NavList>
-          <NavItem>소개</NavItem>
-          <NavItem>게시판</NavItem>
-          <NavItem>연락</NavItem>
-          <NavItem>메뉴</NavItem>
-          <NavItem>메new</NavItem>
-          <NavItem>me뉴</NavItem>
+          <NavItem>
+            <Link to="/about">소개</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/board">게시판</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/myboard">내 글 보기</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/mypage">마이 페이지</Link>
+          </NavItem>
         </NavList>
       </Nav>
     );
@@ -30,10 +37,11 @@ const NavList = styled.ul`
   width: 1080px;
   display: flex;
   margin: 0 auto;
+  justify-content: space-around;
 `;
 
 const NavItem = styled.li`
-  width: 60px;
+  width: 100%;
   margin-left: 18px;
   margin-top: 5px;
   display: flex;
