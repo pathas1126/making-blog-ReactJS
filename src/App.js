@@ -23,7 +23,26 @@ class App extends Component {
 
   onLogout = () => {
     this.setState({ logged: false });
+
+    const provider = window.sessionStorage.getItem("provider");
+
+    if (provider === "google") {
+      const auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("Google Lougout.");
+      });
+    }
+    window.sessionStorage.clear();
   };
+
+  componentDidMount() {
+    const id = window.sessionStorage.getItem("id");
+    if (id) {
+      this.onLogin();
+    } else {
+      this.onLogout();
+    }
+  }
 
   render() {
     const { logged, onLogout } = this.state;

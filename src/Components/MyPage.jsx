@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import withLogin from "./LoginHOC";
 
 export class MyPage extends Component {
   render() {
-    return <div></div>;
+    return <div>마이 페이지</div>;
   }
 }
 
-export default MyPage;
+export default withLogin(MyPage);

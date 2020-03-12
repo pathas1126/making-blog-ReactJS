@@ -19,13 +19,22 @@ class Login extends Component {
     });
     console.log(this.state);
     console.log(this.props);
-    this.props.onLogin();
-    this.props.history.push("/");
+    this.doSignUp();
   };
 
   // Logon Fail
   responseFail = err => {
     console.error(err);
+  };
+
+  // 로그인 정보를 window객체의 sessionStorage에 저장하는 함수
+  doSignUp = () => {
+    const { id, name, provider } = this.state;
+    window.sessionStorage.setItem("id", id);
+    window.sessionStorage.setItem("name", name);
+    window.sessionStorage.setItem("provider", provider);
+    this.props.onLogin();
+    this.props.history.push("/");
   };
 
   render() {
