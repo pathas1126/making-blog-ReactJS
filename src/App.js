@@ -1,22 +1,47 @@
-import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import React, { Component } from "react";
+import styled, { createGlobalStyle, ThemeConsumer } from "styled-components";
 import Header from "./Layout/Header";
 import Navigation from "./Layout/Navigation";
 import Router from "./Routes/Router";
+import Store from "./Store/store";
 
-function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Layout>
-        <Header />
-        <Navigation />
-        <Content>
-          <Router />
-        </Content>
-      </Layout>
-    </>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      logged: false,
+      onLogin: this.onLogin,
+      onLogout: this.onLogout
+    };
+  }
+
+  // 로그인 함수,  logged 값을 true로 변경
+  // 함수를 state로 해서 props로 전달하려면 생성자 내부에 state 작성
+  onLogin = () => {
+    this.setState({ logged: true });
+  };
+
+  onLogout = () => {
+    this.setState({ logged: false });
+  };
+
+  render() {
+    const { logged, onLogout } = this.state;
+    return (
+      <>
+        <GlobalStyle />
+        <Store.Provider value={this.state}>
+          <Layout>
+            <Header logged={logged} onLogout={onLogout} />
+            <Navigation />
+            <Content>
+              <Router />
+            </Content>
+          </Layout>
+        </Store.Provider>
+      </>
+    );
+  }
 }
 
 export default App;
